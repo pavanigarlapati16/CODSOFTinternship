@@ -1,0 +1,34 @@
+import random
+import string
+
+def generate_password():
+    print("🔐 Welcome to Password Generator")
+
+    # User input for length
+    length = int(input("Enter desired password length: "))
+
+    # Ask user about character types to include
+    include_letters = input("Include letters? (y/n): ").lower() == 'y'
+    include_digits = input("Include digits? (y/n): ").lower() == 'y'
+    include_symbols = input("Include symbols? (y/n): ").lower() == 'y'
+
+    # Create a character pool based on user input
+    character_pool = ""
+
+    if include_letters:
+        character_pool += string.ascii_letters  # a-zA-Z
+    if include_digits:
+        character_pool += string.digits         # 0-9
+    if include_symbols:
+        character_pool += string.punctuation    # !@#$%^&*() etc.
+
+    if not character_pool:
+        print("⚠️ No character types selected. Exiting.")
+        return
+
+    # Generate password
+    password = ''.join(random.choice(character_pool) for _ in range(length))
+    print(f"\nGenerated Password: {password}")
+
+# Run the generator
+generate_password()
